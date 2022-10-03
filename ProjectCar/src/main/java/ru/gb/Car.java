@@ -1,16 +1,30 @@
 package ru.gb;
 
-public class Car {
+import ru.gb.base.Base;
+import ru.gb.lights.DippedHeadlights;
+import ru.gb.lights.HighBeamHeadlights;
+import ru.gb.lights.LightInCar;
+
+import java.util.List;
+
+public class Car{
     private Base base;
     private LightInCar lightInCar;
     private Door driverDoor;
+    private DippedHeadlights dippedHeadlights;
+    private HighBeamHeadlights highBeamHeadlights;
     private AirСonditioner airСonditioner;
+    private List<ReadyToClose> readyToClose;
 
     public Car() {
         base = new Base();
+
         lightInCar = new LightInCar();
         driverDoor = new Door();
         airСonditioner = new AirСonditioner();
+        dippedHeadlights = new DippedHeadlights();
+        highBeamHeadlights = new HighBeamHeadlights();
+        readyToClose = List.of(driverDoor, dippedHeadlights, highBeamHeadlights, base);
     }
     public void startCar(){
         base.start();
@@ -37,6 +51,12 @@ public class Car {
     public void airСonditionerOff(){
         airСonditioner.stopConditioner();
     }
+
+    public void readyToTurnOnTheAlarm(){
+        for (ReadyToClose item: readyToClose) {
+            item.turnedOff();
+        }
+    }
     public static void main(String[] args) {
         Car car = new Car();
         car.openAllDoor();
@@ -46,6 +66,7 @@ public class Car {
         car.airСonditionerOn();
         car.airСonditionerOff();
         car.stopCar();
+        car.readyToTurnOnTheAlarm();
     }
 
 

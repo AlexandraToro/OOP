@@ -1,15 +1,20 @@
 package ru.gb;
 
-public class Door {
+public class Door implements ReadyToClose{
     private boolean doorLock;
 
     public void doorClose(){
         this.doorLock = true;
-        System.out.println("The door is closed");
+        System.out.println("Дверь закрыта");
     }
 
     public void doorOpen(){
         this.doorLock = false;
-        System.out.println("The door is opened");
+        System.out.println("Дверь открыта");
+    }
+
+    @Override
+    public void turnedOff() {
+        System.out.println("Двери закрыты, готовы к включению сигнализации");
     }
 }
